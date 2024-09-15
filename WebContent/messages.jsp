@@ -5,14 +5,12 @@
 <%@ page import="java.util.List"%>
 <%@ page import="java.text.SimpleDateFormat"%>
 
-<!-- Učitavanje UserBean iz sesije i MessageManager-a iz aplikacije -->
 <jsp:useBean id="userBean" class="net.etfbl.ip.beans.UserBean"
 	scope="session" />
 <jsp:useBean id="messageManager"
 	class="net.etfbl.ip.service.MessageManager" scope="application" />
 
 <%
-// Provera da li je korisnik prijavljen
 if (userBean == null || !userBean.isLoggedIn()) {
 	response.sendRedirect("login.jsp");
 	return;
@@ -58,10 +56,10 @@ footer {
 <body class="vh-100">
 	<%@ include file="WEB-INF/header.jsp"%>
 
-	<!-- Prikazivanje notifikacije ako je email uspešno poslat -->
 	<%
 	String status = request.getParameter("status");
-	if (status != null && status.equals("success")) {
+	if (status != null) {
+		if (status.equals("success")) {
 	%>
 	<div class="alert alert-success alert-dismissible fade show"
 		role="alert">
@@ -70,8 +68,19 @@ footer {
 			aria-label="Close"></button>
 	</div>
 	<%
+	} else if (status.equals("deleted")) {
+	%>
+	<div class="alert alert-success alert-dismissible fade show"
+		role="alert">
+		Poruka je uspješno obrisana!
+		<button type="button" class="btn-close" data-bs-dismiss="alert"
+			aria-label="Close"></button>
+	</div>
+	<%
+	}
 	}
 	%>
+
 
 	<div class="container my-5">
 		<h2 class="text-left mb-4">Prijemno sanduče:</h2>
@@ -102,7 +111,7 @@ footer {
 					<td><%=formattedDate%></td>
 					<td><a href="view-message.jsp?id=<%=message.getId()%>"
 						class="btn btn-sm btn-primary">Otvori</a> <a
-						href="deleteMessage.jsp?id=<%=message.getId()%>"
+						href="delete-message.jsp?id=<%=message.getId()%>"
 						class="btn btn-sm btn-danger">Obriši</a></td>
 				</tr>
 				<%

@@ -12,7 +12,14 @@
 <jsp:useBean id="emailManager" class="net.etfbl.ip.service.EmailManager"
 	scope="application" />
 
+<jsp:useBean id="userBean" class="net.etfbl.ip.beans.UserBean"
+	scope="session" />
+
 <%
+if (userBean == null || !userBean.isLoggedIn()) {
+	response.sendRedirect("login.jsp");
+	return;
+}
 boolean isMultipart = ServletFileUpload.isMultipartContent(request); // Check if it's a multipart form
 
 if (isMultipart) {

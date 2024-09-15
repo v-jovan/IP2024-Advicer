@@ -9,6 +9,6 @@ public class SQLQueries {
 	public static final String GET_MESSAGES_FOR_USER = "SELECT m.id, m.sender_id, m.recipient_id, m.subject, m.content, m.sent_at, m.read_at, u.username AS sender_name FROM message m JOIN user u ON m.sender_id = u.id  WHERE m.recipient_id = ? ORDER BY m.read_at IS NULL DESC, m.sent_at DESC";
 	public static final String GET_MESSAGE_BY_ID = "SELECT * from message WHERE id = ?";
 	public static final String MARK_MESSAGE_AS_READ = "UPDATE message SET read_at = NOW() WHERE id = ? AND read_at IS NULL;";
-	public static final String DELETE_MESSAGE_BY_ID = "DELETE FROM messages WHERE id = ?";
+	public static final String DELETE_MESSAGE_BY_ID = "DELETE FROM message WHERE id = ?";
 
 }
