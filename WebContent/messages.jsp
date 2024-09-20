@@ -51,6 +51,10 @@ footer {
 	padding: 1rem;
 	text-align: center;
 }
+
+.unread-message {
+	font-weight: bold;
+}
 </style>
 </head>
 <body class="vh-100">
@@ -99,7 +103,6 @@ footer {
 				<%
 				if (messages != null && !messages.isEmpty()) {
 					for (MessageBean message : messages) {
-						// Klasa za nepročitane poruke
 						String rowClass = (message.getReadAt() == null) ? "unread-message" : "";
 						String formattedDate = sdf.format(message.getSentAt());
 				%>
@@ -118,7 +121,6 @@ footer {
 				}
 				} else {
 				%>
-				<!-- Prikazivanje poruke da nema dostupnih poruka -->
 				<tr class="text-center">
 					<td colspan="6">Nema dostupnih poruka.</td>
 				</tr>
